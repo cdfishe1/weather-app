@@ -1,95 +1,94 @@
 const submitCity = document.getElementById('submitCity');
 const cityInput = document.getElementById('cityName');
+let currentDate = moment().format("dddd, MMMM Do YYYY");
+let currentCity = document.querySelector('#currentCity');
 
-let cityName;
-
-submitCity.addEventListener('click', function() {
-    cityName = cityInput.value;
-    console.log(cityName);
-});
-
-console.log(cityName);
-
-
-
-
-
-const getLocationApi = () => {
-    let requestUrl = 'https://geocode.xyz/Chicago?json=1&auth=519255307879293338914x49061';
-
-    fetch(requestUrl)
-        .then(function (response) {
-            return response.json();
-        })
-        .then(function (data) {
-            console.log(data);
-        })
-}; 
-
-// getLocationApi();
 
 
 const getWeatherApi = () => {
-    let requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=41.85&lon=-87.65&units=imperial&appid=50df5f30fc22dca71863fda8cb6c6f1d';
-    let currentDate = moment().format("dddd, MMMM Do YYYY");
-    let currentCity = document.querySelector('#currentCity');
-    
-    fetch(requestUrl)
-      .then(function (response) {
-        return response.json();
-      })
-      .then(function (data) {
-        console.log(data);
+  let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=41.85&lon=-87.65&units=imperial&appid=50df5f30fc22dca71863fda8cb6c6f1d`;
+  
+  
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
 
+      
+        let cityNameEl = document.createElement('h2');
+        let date = document.createElement('span');
+
+        let tempEl = document.createElement('p')
+        let temp = document.createElement('span');
+
+        let humidityEl = document.createElement('p');
+        let humidity = document.createElement('span');
+
+        let windSpeedEl = document.createElement('p');
+        let windSpeed = document.createElement('span');
+
+        let uvEl = document.createElement('p');
+        let uv = document.createElement('span');
+
+        cityNameEl.textContent = 'Chicago';
+        date.textContent = currentDate;
+
+        tempEl.textContent = "Temperature: ";
+        temp.innerHTML = data.current.temp + ' &deg F'
+
+        humidityEl.textContent = 'Humidity:  '
+        humidity.textContent = data.current.humidity + ' %';
+      
+        windSpeedEl.textContent = 'Wind Speed: ';
+        windSpeed.textContent = data.current.wind_speed + ' MPH';
+
+        uvEl.textContent = 'UV Index: ';
+        uv.textContent = data.current.uvi;
+
+        currentCity.append(cityNameEl);
+        cityNameEl.append(date);
+
+        tempEl.append(temp);
+        currentCity.append(tempEl);
+
+        humidityEl.append(humidity);
+        currentCity.append(humidityEl);
+
+        windSpeedEl.append(windSpeed);
+        currentCity.append(windSpeedEl);
+
+        uvEl.append(uv);
+        currentCity.append(uvEl);
         
-          let cityName = document.createElement('h2');
-          let date = document.createElement('span');
+      
+    });
+}
 
-          let tempPlace = document.createElement('p')
-          let temp = document.createElement('span');
+getWeatherApi();
 
-          let humidityPlace = document.createElement('p');
-          let humidity = document.createElement('span');
 
-          let windSpeedPlace = document.createElement('p');
-          let windSpeed = document.createElement('span');
+// submitCity.addEventListener('click', function() {
+//     cityName = cityInput.value.trim();
+//     let requestUrl = `https://geocode.xyz/${cityName}?json=1&auth=519255307879293338914x49061`;
 
-          let uvPlace = document.createElement('p');
-          let uv = document.createElement('span');
+//     fetch(requestUrl)
+//         .then(function (response) {
+//             return response.json();
+//         })
+//         .then(function (data) {
+//             console.log(data);
 
-          cityName.textContent = 'Chicago';
-          date.textContent = currentDate;
-
-          tempPlace.textContent = "Temperature: ";
-          temp.innerHTML = data.current.temp + ' &deg F'
-
-          humidityPlace.textContent = 'Humidity:  '
-          humidity.textContent = data.current.humidity + ' %';
+//             latitude = data.latt;
+//             longitude = data.longt;
+//         })
         
-          windSpeedPlace.textContent = 'Wind Speed: ';
-          windSpeed.textContent = data.current.wind_speed + ' MPH';
-          console.log(data.current.weather);
+  
+// });
 
-          uvPlace.textContent = 'UV Index: ';
-          uv.textContent = data.current.uvi;
 
-          currentCity.append(cityName);
-          cityName.append(date);
 
-          tempPlace.append(temp);
-          currentCity.append(tempPlace);
 
-          humidityPlace.append(humidity);
-          currentCity.append(humidityPlace);
 
-          windSpeedPlace.append(windSpeed);
-          currentCity.append(windSpeedPlace);
 
-          uvPlace.append(uv);
-          currentCity.append(uvPlace);
-          
-        
-      });
-  }
-
-// getWeatherApi();
