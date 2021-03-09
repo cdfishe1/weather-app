@@ -1,3 +1,19 @@
+const submitCity = document.getElementById('submitCity');
+const cityInput = document.getElementById('cityName');
+
+let cityName;
+
+submitCity.addEventListener('click', function() {
+    cityName = cityInput.value;
+    console.log(cityName);
+});
+
+console.log(cityName);
+
+
+
+
+
 const getLocationApi = () => {
     let requestUrl = 'https://geocode.xyz/Chicago?json=1&auth=519255307879293338914x49061';
 
@@ -10,7 +26,7 @@ const getLocationApi = () => {
         })
 }; 
 
-getLocationApi();
+// getLocationApi();
 
 
 const getWeatherApi = () => {
@@ -76,4 +92,4 @@ const getWeatherApi = () => {
       });
   }
 
-getWeatherApi();
+// getWeatherApi();
