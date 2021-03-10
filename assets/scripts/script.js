@@ -2,13 +2,9 @@ const submitCity = document.getElementById('submitCity');
 const cityInput = document.getElementById('cityName');
 let currentDate = moment().format("dddd, MMMM Do YYYY");
 let currentCity = document.querySelector('#currentCity');
+let fiveDay = document.querySelector('#fiveDay');
 let latitude;
 let longitude;
-
-
-
-
-
 
 submitCity.addEventListener('click', function() {
     cityName = cityInput.value.trim();
@@ -31,7 +27,7 @@ submitCity.addEventListener('click', function() {
   
 });
 
-const getWeatherApi = () => {
+const getCurrentWeatherApi = () => {
   let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=41.85&lon=-87.65&units=imperial&appid=50df5f30fc22dca71863fda8cb6c6f1d`;
   
   
@@ -40,9 +36,8 @@ const getWeatherApi = () => {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      // console.log(data);
 
-      
         let cityNameEl = document.createElement('h2');
         let date = document.createElement('span');
         let currentIconEl = document.createElement('span');
@@ -95,10 +90,45 @@ const getWeatherApi = () => {
     });
 }
 
-getWeatherApi();
+getCurrentWeatherApi();
 
+const getFiveDayApi = () => {
+  var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=41.85&lon=-87.65&units=imperial&appid=50df5f30fc22dca71863fda8cb6c6f1d';
 
+  fetch(requestUrl)
+    .then(function (response) {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
+      for (let i = 0; i <= 5; i++) {
+        const fiveDayDateEl = document.createElement('h3');
+        const fiveDayIconEl = document.createElement('span');
+        const fiveDayTempEl = document.createElement('p');
+        const fiveDayTemp = document.createElement('span');
+        const fiveDayHumidityEl = document.createElement('p');
+        const fiveDayHumidity = document.createElement('span');
+        let dateString = moment.unix(data.daily[i].dt).format("MM/DD/YYYY");
 
+        fiveDayDateEl.innerHTML = dateString;
+        fiveDayIconEl.innerHTML = `<img src = http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png>`;
+        fiveDayTempEl.innerHTML = 'Temp: ';
+        fiveDayTemp.innerHTML = data.daily[i].temp.day + ' &deg F';
+        fiveDayHumidityEl.innerHTML = 'Humidity ';
+        fiveDayHumidity.innerHTML = data.daily[i].humidity + ' %';
+
+        fiveDay.append(fiveDayDateEl);
+        fiveDay.append(fiveDayIconEl);
+        fiveDay.append(fiveDayTempEl);
+        fiveDayTempEl.append(fiveDayTemp);
+        fiveDay.append(fiveDayHumidityEl);
+        fiveDayHumidityEl.append(fiveDayHumidity);
+
+      }
+    });
+};
+
+getFiveDayApi();
 
 
 
