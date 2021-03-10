@@ -54,8 +54,9 @@ const getCurrentWeatherApi = () => {
         let uvEl = document.createElement('p');
         let uv = document.createElement('span');
 
-        cityNameEl.textContent = 'Chicago';
+        cityNameEl.textContent = 'Chicago ';
         date.textContent = currentDate;
+        date.style.fontSize = '1.25rem';
         currentIconEl.innerHTML = `<img src = http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png>`;
 
         tempEl.textContent = "Temperature: ";
@@ -72,7 +73,7 @@ const getCurrentWeatherApi = () => {
 
         currentCity.append(cityNameEl);
         cityNameEl.append(date);
-        date.append(currentIconEl);
+        currentCity.append(currentIconEl);
 
         tempEl.append(temp);
         currentCity.append(tempEl);
@@ -102,6 +103,8 @@ const getFiveDayApi = () => {
     .then(function (data) {
       console.log(data);
       for (let i = 0; i <= 5; i++) {
+        const fiveDayContainerEl = document.createElement('div');
+        fiveDayContainerEl.setAttribute('class', 'card');
         const fiveDayDateEl = document.createElement('h3');
         const fiveDayIconEl = document.createElement('span');
         const fiveDayTempEl = document.createElement('p');
@@ -117,12 +120,13 @@ const getFiveDayApi = () => {
         fiveDayHumidityEl.innerHTML = 'Humidity ';
         fiveDayHumidity.innerHTML = data.daily[i].humidity + ' %';
 
-        fiveDay.append(fiveDayDateEl);
-        fiveDay.append(fiveDayIconEl);
-        fiveDay.append(fiveDayTempEl);
+        fiveDayContainerEl.append(fiveDayDateEl);
+        fiveDayContainerEl.append(fiveDayIconEl);
+        fiveDayContainerEl.append(fiveDayTempEl);
         fiveDayTempEl.append(fiveDayTemp);
-        fiveDay.append(fiveDayHumidityEl);
+        fiveDayContainerEl.append(fiveDayHumidityEl);
         fiveDayHumidityEl.append(fiveDayHumidity);
+        fiveDay.append(fiveDayContainerEl);
 
       }
     });

@@ -1,0 +1,65 @@
+* {
+    padding: o;
+    margin: 0;
+};
+
+:root {
+    --dark: #003049;
+}
+
+body { 
+    display: grid;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: auto 1fr 1fr;
+    grid-template-areas: 
+        'header header'
+        'search current'
+        'search fiveday';
+
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+main {
+    /* display: flex;
+    flex-flow: wrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    align-content: flex-start; */
+}
+
+header {
+    grid-area: header;
+    text-align: center;
+    background-color: #003049;
+    color: white;
+
+    padding: 3vh 3vw;
+}
+
+.search-wrapper {
+    grid-area: search;
+    /* border: 1px solid black; */
+    margin: 1vh 1vw;
+}
+
+.current-city {
+    grid-area: current;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin: 1vh 1vw;
+    padding: 1vh 1vw;
+}
+
+.five-day {
+    grid-area: fiveday;
+    
+}
+
+.card {
+    background-color: aqua;
+    color: var(--dark);
+    margin: 1vh 1vw;
+    padding: 1vh 1vw;
+    border-radius: 8px;
+}

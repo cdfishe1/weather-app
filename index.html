@@ -22,16 +22,17 @@
     </header>
 
     <main>
+      <div id='searchWrapper' class='search-wrapper'>
         <label for="cityName">Enter a city name:</label>
         <input type="text" id='cityName' name='cityName'>
         <button id='submitCity'>Submit</button>
-       
+        <section id='savedCities' class='saved-cities'></section>
+      </div>
 
-        <section id='savedCities'></section>
+      <section id='currentCity' class='current-city'></section>
 
-        <section id='currentCity'></section>
+      <section id='fiveDay' class='five-day'></section>
 
-        <section id='fiveDay'></section>
     </main>
 
     <script src='./assets/scripts/script.js'></script>
