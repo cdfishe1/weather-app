@@ -89,7 +89,7 @@ const getCurrentWeatherApi = () => {
         
       
     });
-}
+};
 
 getCurrentWeatherApi();
 
