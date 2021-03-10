@@ -2,8 +2,34 @@ const submitCity = document.getElementById('submitCity');
 const cityInput = document.getElementById('cityName');
 let currentDate = moment().format("dddd, MMMM Do YYYY");
 let currentCity = document.querySelector('#currentCity');
+let latitude;
+let longitude;
 
 
+
+
+
+
+submitCity.addEventListener('click', function() {
+    cityName = cityInput.value.trim();
+    let requestUrl = `https://geocode.xyz/${cityName}?json=1&auth=519255307879293338914x49061`;
+
+    fetch(requestUrl)
+        .then(function (response) {
+            return response.json();
+        })
+        .then(function (data) {
+            console.log(data);
+
+            latitude = data.latt;
+            longitude = data.longt;
+
+            console.log(latitude);
+            console.log(longitude);
+        })
+        
+  
+});
 
 const getWeatherApi = () => {
   let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=41.85&lon=-87.65&units=imperial&appid=50df5f30fc22dca71863fda8cb6c6f1d`;
@@ -19,6 +45,7 @@ const getWeatherApi = () => {
       
         let cityNameEl = document.createElement('h2');
         let date = document.createElement('span');
+        let currentIconEl = document.createElement('span');
 
         let tempEl = document.createElement('p')
         let temp = document.createElement('span');
@@ -34,6 +61,7 @@ const getWeatherApi = () => {
 
         cityNameEl.textContent = 'Chicago';
         date.textContent = currentDate;
+        currentIconEl.innerHTML = '<img src = http://openweathermap.org/img/wn/10d@2x.png>';
 
         tempEl.textContent = "Temperature: ";
         temp.innerHTML = data.current.temp + ' &deg F'
@@ -49,6 +77,7 @@ const getWeatherApi = () => {
 
         currentCity.append(cityNameEl);
         cityNameEl.append(date);
+        date.append(currentIconEl);
 
         tempEl.append(temp);
         currentCity.append(tempEl);
@@ -67,25 +96,6 @@ const getWeatherApi = () => {
 }
 
 getWeatherApi();
-
-
-// submitCity.addEventListener('click', function() {
-//     cityName = cityInput.value.trim();
-//     let requestUrl = `https://geocode.xyz/${cityName}?json=1&auth=519255307879293338914x49061`;
-
-//     fetch(requestUrl)
-//         .then(function (response) {
-//             return response.json();
-//         })
-//         .then(function (data) {
-//             console.log(data);
-
-//             latitude = data.latt;
-//             longitude = data.longt;
-//         })
-        
-  
-// });
 
 
 
