@@ -61,7 +61,7 @@ const getWeatherApi = () => {
 
         cityNameEl.textContent = 'Chicago';
         date.textContent = currentDate;
-        currentIconEl.innerHTML = '<img src = http://openweathermap.org/img/wn/10d@2x.png>';
+        currentIconEl.innerHTML = `<img src = http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png>`;
 
         tempEl.textContent = "Temperature: ";
         temp.innerHTML = data.current.temp + ' &deg F'
