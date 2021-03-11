@@ -19,15 +19,17 @@ submitCity.addEventListener('click', function() {
 
             latitude = data[0].lat;
             longitude = data[0].lon;
+            city = data[0].name;
 
-            getCurrentWeatherApi(latitude, longitude);
+            getCurrentWeatherApi(latitude, longitude, city);
+            getFiveDayApi(latitude, longitude, city);
 
         })
         
   
 });
 
-const getCurrentWeatherApi = (latitude, longitude) => {
+const getCurrentWeatherApi = (latitude, longitude, city) => {
   let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
   
   
@@ -54,7 +56,7 @@ const getCurrentWeatherApi = (latitude, longitude) => {
         let uvEl = document.createElement('p');
         let uv = document.createElement('span');
 
-        cityNameEl.textContent = 'Chicago ';
+        cityNameEl.textContent = city;
         date.textContent = currentDate;
         date.style.fontSize = '1.25rem';
         currentIconEl.innerHTML = `<img src = http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png>`;
@@ -91,10 +93,9 @@ const getCurrentWeatherApi = (latitude, longitude) => {
     });
 };
 
-// getCurrentWeatherApi();
 
-const getFiveDayApi = () => {
-  var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=41.85&lon=-87.65&units=imperial&appid=50df5f30fc22dca71863fda8cb6c6f1d';
+const getFiveDayApi = (latitude, longitude, city) => {
+  var requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
 
   fetch(requestUrl)
     .then(function (response) {
