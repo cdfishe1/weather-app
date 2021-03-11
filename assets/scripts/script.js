@@ -1,3 +1,5 @@
+// Variables
+
 let currentDate = moment().format("dddd, MMMM Do YYYY");
 const apiKey = '50df5f30fc22dca71863fda8cb6c6f1d';
 const submitCity = document.querySelector('#submitCity');
@@ -8,6 +10,7 @@ const fiveDay = document.querySelector('#fiveDay');
 const storedCities = JSON.parse(localStorage.getItem("cityNames")) || [];
 const displayCitiesList = document.createElement('ul');
 
+// Event listener for search button
 submitCity.addEventListener('click', function() {
     cityName = cityInput.value.trim();
     let requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`;
@@ -34,7 +37,7 @@ submitCity.addEventListener('click', function() {
   
 });
 
-
+// Gets the api for the current day's weather and creates that section
 const getCurrentWeatherApi = (latitude, longitude, city) => {
   let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
   
@@ -99,7 +102,7 @@ const getCurrentWeatherApi = (latitude, longitude, city) => {
     });
 };
 
-
+// Grabs the api for the five day forecast and creates that section with individual days
 const getFiveDayApi = (latitude, longitude) => {
   var requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
 
@@ -139,6 +142,7 @@ const getFiveDayApi = (latitude, longitude) => {
     });
 };
 
+// Creates the saved cities buttons
 const makeCityList = () => {
   storedCities.forEach((city) => {
     const cityItem = document.createElement('li');
@@ -154,6 +158,7 @@ const makeCityList = () => {
 
 makeCityList();
 
+// Creates the saved cities buttons array and runs an event listener to populate the search input field on click
 const cityButtons = document.getElementsByClassName('city-button');
 const cityButtonsArray = Array.from(cityButtons);
 
