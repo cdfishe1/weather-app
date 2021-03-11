@@ -1,10 +1,9 @@
-const submitCity = document.getElementById('submitCity');
-const cityInput = document.getElementById('cityName');
+const submitCity = document.querySelector('#submitCity');
+const cityInput = document.querySelector('#cityName');
 let currentDate = moment().format("dddd, MMMM Do YYYY");
-let currentCity = document.querySelector('#currentCity');
-let fiveDay = document.querySelector('#fiveDay');
-let latitude;
-let longitude;
+const currentCity = document.querySelector('#currentCity');
+const fiveDay = document.querySelector('#fiveDay');
+
 
 submitCity.addEventListener('click', function() {
     cityName = cityInput.value.trim();
@@ -102,7 +101,7 @@ const getFiveDayApi = () => {
     })
     .then(function (data) {
       console.log(data);
-      for (let i = 0; i <= 5; i++) {
+      for (let i = 1; i <= 5; i++) {
         const fiveDayContainerEl = document.createElement('div');
         fiveDayContainerEl.setAttribute('class', 'card');
         const fiveDayDateEl = document.createElement('h3');
@@ -111,7 +110,7 @@ const getFiveDayApi = () => {
         const fiveDayTemp = document.createElement('span');
         const fiveDayHumidityEl = document.createElement('p');
         const fiveDayHumidity = document.createElement('span');
-        let dateString = moment.unix(data.daily[i].dt).format("MM/DD/YYYY");
+        let dateString = moment.unix(data.daily[i].dt).format("dddd");
 
         fiveDayDateEl.innerHTML = dateString;
         fiveDayIconEl.innerHTML = `<img src = http://openweathermap.org/img/wn/${data.daily[i].weather[0].icon}@2x.png>`;
