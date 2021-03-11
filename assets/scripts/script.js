@@ -3,11 +3,12 @@ const cityInput = document.querySelector('#cityName');
 let currentDate = moment().format("dddd, MMMM Do YYYY");
 const currentCity = document.querySelector('#currentCity');
 const fiveDay = document.querySelector('#fiveDay');
+const apiKey = '50df5f30fc22dca71863fda8cb6c6f1d';
 
 
 submitCity.addEventListener('click', function() {
     cityName = cityInput.value.trim();
-    let requestUrl = `https://geocode.xyz/${cityName}?json=1&auth=519255307879293338914x49061`;
+    let requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`;
 
     fetch(requestUrl)
         .then(function (response) {
@@ -16,17 +17,17 @@ submitCity.addEventListener('click', function() {
         .then(function (data) {
             console.log(data);
 
-            latitude = data.latt;
-            longitude = data.longt;
+            latitude = data[0].lat;
+            longitude = data[0].lon;
 
-            console.log(latitude);
-            console.log(longitude);
+            getCurrentWeatherApi(latitude, longitutde);
+
         })
         
   
 });
 
-const getCurrentWeatherApi = () => {
+const getCurrentWeatherApi = (latitude, longitude) => {
   let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=41.85&lon=-87.65&units=imperial&appid=50df5f30fc22dca71863fda8cb6c6f1d`;
   
   
@@ -90,7 +91,7 @@ const getCurrentWeatherApi = () => {
     });
 };
 
-getCurrentWeatherApi();
+// getCurrentWeatherApi();
 
 const getFiveDayApi = () => {
   var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=41.85&lon=-87.65&units=imperial&appid=50df5f30fc22dca71863fda8cb6c6f1d';
@@ -131,7 +132,7 @@ const getFiveDayApi = () => {
     });
 };
 
-getFiveDayApi();
+// getFiveDayApi();
 
 
 
