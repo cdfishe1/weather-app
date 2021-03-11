@@ -20,7 +20,7 @@ submitCity.addEventListener('click', function() {
             latitude = data[0].lat;
             longitude = data[0].lon;
 
-            getCurrentWeatherApi(latitude, longitutde);
+            getCurrentWeatherApi(latitude, longitude);
 
         })
         
@@ -28,7 +28,7 @@ submitCity.addEventListener('click', function() {
 });
 
 const getCurrentWeatherApi = (latitude, longitude) => {
-  let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=41.85&lon=-87.65&units=imperial&appid=50df5f30fc22dca71863fda8cb6c6f1d`;
+  let requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
   
   
   fetch(requestUrl)
@@ -36,7 +36,7 @@ const getCurrentWeatherApi = (latitude, longitude) => {
       return response.json();
     })
     .then(function (data) {
-      // console.log(data);
+      console.log(data);
 
         let cityNameEl = document.createElement('h2');
         let date = document.createElement('span');
