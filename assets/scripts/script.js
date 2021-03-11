@@ -2,13 +2,11 @@ let currentDate = moment().format("dddd, MMMM Do YYYY");
 const apiKey = '50df5f30fc22dca71863fda8cb6c6f1d';
 const submitCity = document.querySelector('#submitCity');
 const savedCities = document.querySelector('#savedCities')
-const cityInput = document.querySelector('#cityName');
+const cityInput = document.querySelector('#cityInput');
 const currentCity = document.querySelector('#currentCity');
 const fiveDay = document.querySelector('#fiveDay');
 const storedCities = JSON.parse(localStorage.getItem("cityNames")) || [];
 const displayCitiesList = document.createElement('ul');
-
-
 
 submitCity.addEventListener('click', function() {
     cityName = cityInput.value.trim();
@@ -35,7 +33,6 @@ submitCity.addEventListener('click', function() {
         
   
 });
-
 
 
 const getCurrentWeatherApi = (latitude, longitude, city) => {
@@ -145,7 +142,9 @@ const getFiveDayApi = (latitude, longitude) => {
 const makeCityList = () => {
   storedCities.forEach((city) => {
     const cityItem = document.createElement('li');
-    const cityItemButton = document.createElement('button');    
+    const cityItemButton = document.createElement('button'); 
+    cityItemButton.setAttribute('class', 'city-button');
+    cityItemButton.setAttribute('value', city); 
     cityItemButton.innerHTML = city;
     cityItem.append(cityItemButton);
     displayCitiesList.append(cityItem);
@@ -154,6 +153,17 @@ const makeCityList = () => {
 };
 
 makeCityList();
+
+const cityButtons = document.getElementsByClassName('city-button');
+const cityButtonsArray = Array.from(cityButtons);
+
+cityButtonsArray.forEach((button) => {
+  button.addEventListener('click', function() {
+    cityInput.value = button.value;
+  })
+})
+
+
 
 
 
