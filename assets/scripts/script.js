@@ -21,8 +21,12 @@ submitCity.addEventListener('click', function() {
             longitude = data[0].lon;
             city = data[0].name;
 
+            let oldScores = JSON.parse(localStorage.getItem("storeScores")) || [];
+            oldScores.push(storeScores);
+            localStorage.setItem('storeScores', JSON.stringify(oldScores));
+
             getCurrentWeatherApi(latitude, longitude, city);
-            getFiveDayApi(latitude, longitude, city);
+            getFiveDayApi(latitude, longitude);
 
         })
         
@@ -94,7 +98,7 @@ const getCurrentWeatherApi = (latitude, longitude, city) => {
 };
 
 
-const getFiveDayApi = (latitude, longitude, city) => {
+const getFiveDayApi = (latitude, longitude) => {
   var requestUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&units=imperial&appid=${apiKey}`;
 
   fetch(requestUrl)
