@@ -73,8 +73,8 @@ const getCurrentWeatherApi = (latitude, longitude, city) => {
         uvEl.textContent = 'UV Index: ';
         uv.textContent = data.current.uvi;
 
+        currentCity.append(date);
         currentCity.append(cityNameEl);
-        cityNameEl.append(date);
         currentCity.append(currentIconEl);
 
         tempEl.append(temp);
@@ -133,7 +133,6 @@ const getFiveDayApi = (latitude, longitude, city) => {
     });
 };
 
-// getFiveDayApi();
 
 
 
