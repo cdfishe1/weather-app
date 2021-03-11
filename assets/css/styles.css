@@ -4,11 +4,14 @@
 };
 
 :root {
-    --dark: #003049;
-}
+    --main-dark: #003049;
+    --pane-padding: 5px 42px;
+  }
 
 body { 
     font-family: Arial, Helvetica, sans-serif;
+    width: 80%;
+    margin: 0 auto;
 }
 
 main {
@@ -39,6 +42,7 @@ header {
     border-radius: 8px;
     margin: 1vh 1vw;
     padding: 1vh 1vw;
+    
 }
 
 .five-day {
@@ -50,8 +54,9 @@ header {
 
 .card {
     background-color: aqua;
-    color: var(--dark);
+    color: #003049;
     margin: 1vh 1vw;
     padding: 1vh 1vw;
     border-radius: 8px;
 }
+
