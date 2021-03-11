@@ -21,9 +21,11 @@ submitCity.addEventListener('click', function() {
             longitude = data[0].lon;
             city = data[0].name;
 
-            let oldScores = JSON.parse(localStorage.getItem("storeScores")) || [];
-            oldScores.push(storeScores);
-            localStorage.setItem('storeScores', JSON.stringify(oldScores));
+            let cityArray = JSON.parse(localStorage.getItem("cityNames")) || [];
+            cityArray.push(cityName);
+            localStorage.setItem('cityNames', JSON.stringify(cityArray));
+
+            console.log(localStorage.getItem('cityNames'));
 
             getCurrentWeatherApi(latitude, longitude, city);
             getFiveDayApi(latitude, longitude);
