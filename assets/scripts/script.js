@@ -145,12 +145,11 @@ const getFiveDayApi = (latitude, longitude) => {
 const makeCityList = () => {
   storedCities.forEach((city) => {
     const cityItem = document.createElement('li');
-    const cityItemButton = document.createElement('button');
+    const cityItemButton = document.createElement('button');    
     cityItemButton.innerHTML = city;
     cityItem.append(cityItemButton);
     displayCitiesList.append(cityItem);
   })
-  
   savedCities.append(displayCitiesList);
 };
 
