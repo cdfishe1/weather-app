@@ -51,6 +51,10 @@ const getCurrentWeatherApi = (latitude, longitude, city) => {
     .then(function (data) {
       console.log(data);
 
+        if (currentCity !== null) {
+          currentCity.innerHTML = '';
+        }
+
         let cityNameEl = document.createElement('h2');
         let date = document.createElement('span');
         let currentIconEl = document.createElement('span');
@@ -114,6 +118,10 @@ const getFiveDayApi = (latitude, longitude) => {
     })
     .then(function (data) {
       console.log(data);
+      if (fiveDay !== null) {
+        fiveDay.innerHTML = '';
+      }
+      
       for (let i = 1; i <= 5; i++) {
         const fiveDayContainerEl = document.createElement('div');
         fiveDayContainerEl.setAttribute('class', 'card');
