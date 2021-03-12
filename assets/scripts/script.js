@@ -29,6 +29,7 @@ submitCity.addEventListener('click', function() {
 
             storedCities.push(cityName);
             let deDupedCities = [...new Set(storedCities)];
+            deDupedCities.sort();
             localStorage.setItem('cityNames', JSON.stringify(deDupedCities));
 
             getCurrentWeatherApi(latitude, longitude, city);
@@ -87,6 +88,19 @@ const getCurrentWeatherApi = (latitude, longitude, city) => {
 
         uvEl.textContent = 'UV Index: ';
         uv.textContent = data.current.uvi;
+        switch(data.current.uvi) {
+          case data.current.uvi <= 2.99:
+            uv.style.backgroundColor = 'green';
+            break;
+          case (data.current.uvi >=3 || data.current.uvi <= 5.99):
+            uv.style.backgroundColor = 'yellow';
+            break;
+          case (data.current.uvi >=6 || data.current.uvi <=7.99):
+            uv.style.backgroundColor = 'orange';
+            break;
+          case (data.current.uvi >=8):
+            uv.style.backgroundColor = 'red';
+        }
 
         currentCity.append(date);
         currentCity.append(cityNameEl);
