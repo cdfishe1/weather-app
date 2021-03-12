@@ -14,6 +14,14 @@ const displayCitiesList = document.createElement('ul');
 // Event listener for search button
 submitCity.addEventListener('click', function() {
     cityName = cityInput.value.trim();
+    // // cityName.split(',');
+    // let cityNameComma = cityName.split(',');
+    // if (cityNameComma) {
+    //   console.log(true);
+    // } 
+    // // let cityNameSpace = cityName.split(' ');
+    // // console.log(cityNameSpace);
+    // // console.log(cityNameComma);
     let requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`;
 
     fetch(requestUrl)
@@ -88,19 +96,7 @@ const getCurrentWeatherApi = (latitude, longitude, city) => {
 
         uvEl.textContent = 'UV Index: ';
         uv.textContent = data.current.uvi;
-        switch(data.current.uvi) {
-          case data.current.uvi <= 2.99:
-            uv.style.backgroundColor = 'green';
-            break;
-          case (data.current.uvi >=3 || data.current.uvi <= 5.99):
-            uv.style.backgroundColor = 'yellow';
-            break;
-          case (data.current.uvi >=6 || data.current.uvi <=7.99):
-            uv.style.backgroundColor = 'orange';
-            break;
-          case (data.current.uvi >=8):
-            uv.style.backgroundColor = 'red';
-        }
+  
 
         currentCity.append(date);
         currentCity.append(cityNameEl);
@@ -117,6 +113,20 @@ const getCurrentWeatherApi = (latitude, longitude, city) => {
 
         uvEl.append(uv);
         currentCity.append(uvEl);
+
+        //I tried to make this a switch statement, but it did not work, even with tutor help.
+        if (data.current.uvi < 3) {
+          uv.style.backgroundColor = 'green';
+          uv.style.color = 'white';
+        } else if (data.current.uvi > 3 || data.current.uvi < 6) {
+          uv.style.backgroundColor = 'yellow';
+        } else if (data.current.uvi > 6 || data.current.uvi < 8) {
+          uv.style.backgroundColor = 'orange';
+          uv.style.color = 'white';
+        } else {
+          uv.style.backgroundColor = 'red';
+          uv.style.color = 'white';
+        }
         
       
     });
@@ -189,6 +199,7 @@ const cityButtonsArray = Array.from(cityButtons);
 cityButtonsArray.forEach((button) => {
   button.addEventListener('click', function() {
     cityInput.value = button.value;
+    submitCity.click();
   })
 })
 
