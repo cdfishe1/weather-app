@@ -10,6 +10,7 @@ const fiveDay = document.querySelector('#fiveDay');
 const storedCities = JSON.parse(localStorage.getItem("cityNames")) || [];
 const displayCitiesList = document.createElement('ul');
 
+
 // Event listener for search button
 submitCity.addEventListener('click', function() {
     cityName = cityInput.value.trim();
@@ -27,7 +28,8 @@ submitCity.addEventListener('click', function() {
             city = data[0].name;
 
             storedCities.push(cityName);
-            localStorage.setItem('cityNames', JSON.stringify(storedCities));
+            let deDupedCities = [...new Set(storedCities)];
+            localStorage.setItem('cityNames', JSON.stringify(deDupedCities));
 
             getCurrentWeatherApi(latitude, longitude, city);
             getFiveDayApi(latitude, longitude);
@@ -167,11 +169,4 @@ cityButtonsArray.forEach((button) => {
     cityInput.value = button.value;
   })
 })
-
-
-
-
-
-
-
 
