@@ -38,6 +38,18 @@ main {
     margin: 1vh 1vw;
 }
 
+.search-wrapper label {
+    font-size: 1.5rem;
+}
+
+.search-wrapper input {
+    font-size: 1.25rem;
+}
+
+.search-wrapper button {
+    background-color: aqua;
+}
+
 /* Saved cities list */
 .saved-cities ul li {
     list-style: none;
