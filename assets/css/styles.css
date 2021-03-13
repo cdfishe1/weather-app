@@ -70,7 +70,6 @@ main {
     grid-area: current;
     justify-self: center;
     background-color: #ADE8F4;
-    border: 1px solid black;
     border-radius: 8px;
     margin: 1vh 1vw;
     padding: 1vh 1vw;

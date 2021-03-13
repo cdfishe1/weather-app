@@ -13,6 +13,7 @@ const displayCitiesList = document.createElement('ul');
 
 // Event listener for search button
 submitCity.addEventListener('click', function() {
+  
     cityName = cityInput.value.trim();
     // // cityName.split(',');
     // let cityNameComma = cityName.split(',');
@@ -180,7 +181,7 @@ const getFiveDayApi = (latitude, longitude) => {
 const makeCityList = () => {
   storedCities.forEach((city) => {
     const cityItem = document.createElement('li');
-    const cityItemButton = document.createElement('button'); 
+    const cityItemButton = document.createElement('button');
     cityItemButton.setAttribute('class', 'city-button');
     cityItemButton.setAttribute('value', city); 
     cityItemButton.innerHTML = city;
