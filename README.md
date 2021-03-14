@@ -32,6 +32,7 @@ Site deployed at [Charles Fisher](https://cdfishe1.github.io/weather-app/)
 * Used javascript to dynamically create and populate the contents of elements.
 * Used array methods to deduplicate saved cities and to display them in alphabetical order
 * Used a details element to provide a simple dropdown list to hide or show the saved cities.
+* Saved cities will relaunch search on button click.
 * Used css grid and flexbox to make the site responsive.
 
 
