@@ -22,6 +22,11 @@ header {
     margin-bottom: 1vh;
 }
 
+header p {
+    padding: 1vh 1vw;
+    font-size: 1.25rem;
+}
+
 /* Set the grid for the page */
 main {
     display: grid;
@@ -35,16 +40,22 @@ main {
 /* Wrapper for search field and saved cities */
 .search-wrapper {
     grid-area: search;
-    margin: 1vh 1vw;
+    margin: 1vh;
+    background-color: lightgray;
+    border-radius: 8px;
+    padding: 0.5vh 0.5vw;
+    /* width: 90%; */
 }
 
 .search-wrapper label {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
+    
 }
 
 .search-wrapper input {
-    font-size: 1.5rem;
-    margin: 1vh 1vw;
+    font-size: 1.25rem;
+    margin: 1vh;
+
 }
 
 .search-wrapper button {
@@ -55,6 +66,19 @@ main {
 }
 
 /* Saved cities list */
+
+.saved-cities .clear-button {
+    background-color: red;
+    color: white;
+    padding: 1vh 1vw;
+    margin: 1vh;
+}
+
+.saved-cities summary {
+    padding: 1vh 1vw;
+    cursor: pointer;
+    background-color: aqua;
+}
 .saved-cities ul li {
     list-style: none;
     margin: 1vh 1vw;
@@ -66,11 +90,20 @@ main {
     cursor: pointer;
 }
 
+/* Current location button */
+
+.current-location {
+    padding: 1vh 1vw;
+    border-radius: 8px;
+    border-style: none;
+    background-color: aqua;
+    font-size: 1.25rem;
+}
+
 /* Current city section */
 .current-city {
     grid-area: current;
-    justify-self: center;
-    background-color: #ADE8F4;
+    justify-self: stretch;
     border-radius: 8px;
     margin: 1vh 1vw;
     padding: 1vh 1vw;

@@ -25,14 +25,17 @@
 <body>
     <header>
         <h1>Weather by City</h1>
+        <time id='currentDay'></time>
     </header>
 
     <main>
       <!-- Search bar and saved cities -->
       <div id='searchWrapper' class='search-wrapper'>
+        
         <label for="cityInput">Enter a city name:</label>
         <input type="text" id='cityInput' name='cityInput'>
         <button id='submitCity'><i class="fas fa-search fa-2x"></i></button>
+        
         <section id='savedCities' class='saved-cities'></section>
       </div>
       <!-- Current City -->

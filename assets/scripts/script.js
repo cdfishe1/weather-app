@@ -2,6 +2,9 @@
 
 let currentDate = moment().format("dddd, MMMM Do YYYY");
 const apiKey = '50df5f30fc22dca71863fda8cb6c6f1d';
+const headerEl = document.querySelector('header');
+const currentDay = document.querySelector('#currentDay');
+const currentLocBtn = document.querySelector('#currentLocBtn');
 const submitCity = document.querySelector('#submitCity');
 const savedCities = document.querySelector('#savedCities')
 const cityInput = document.querySelector('#cityInput');
@@ -11,18 +14,17 @@ const storedCities = JSON.parse(localStorage.getItem("cityNames")) || [];
 const displayCitiesList = document.createElement('ul');
 
 
+// Set current day in header
+const dateDisplayEl = document.createElement('p');
+dateDisplayEl.innerHTML = currentDate;
+currentDay.append(dateDisplayEl);
+
+
 // Event listener for search button
 submitCity.addEventListener('click', function() {
   
     cityName = cityInput.value.trim();
-    // // cityName.split(',');
-    // let cityNameComma = cityName.split(',');
-    // if (cityNameComma) {
-    //   console.log(true);
-    // } 
-    // // let cityNameSpace = cityName.split(' ');
-    // // console.log(cityNameSpace);
-    // // console.log(cityNameComma);
+
     let requestUrl = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&appid=${apiKey}`;
 
     fetch(requestUrl)
@@ -30,24 +32,26 @@ submitCity.addEventListener('click', function() {
             return response.json();
         })
         .then(function (data) {
-            console.log(data);
 
             latitude = data[0].lat;
             longitude = data[0].lon;
             city = data[0].name;
-
+            // Create local storage for previous searched cities
             storedCities.push(cityName);
             let deDupedCities = [...new Set(storedCities)];
             deDupedCities.sort();
             localStorage.setItem('cityNames', JSON.stringify(deDupedCities));
-
+            // Call the current and five day weather apis
             getCurrentWeatherApi(latitude, longitude, city);
             getFiveDayApi(latitude, longitude);
+            
+
 
         })
         
   
 });
+
 
 // Gets the api for the current day's weather and creates that section
 const getCurrentWeatherApi = (latitude, longitude, city) => {
@@ -59,14 +63,14 @@ const getCurrentWeatherApi = (latitude, longitude, city) => {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      
 
         if (currentCity !== null) {
           currentCity.innerHTML = '';
         }
 
         let cityNameEl = document.createElement('h2');
-        let date = document.createElement('span');
+        // let date = document.createElement('span');
         let currentIconEl = document.createElement('span');
 
         let tempEl = document.createElement('p')
@@ -81,9 +85,10 @@ const getCurrentWeatherApi = (latitude, longitude, city) => {
         let uvEl = document.createElement('p');
         let uv = document.createElement('span');
 
+        currentCity.style.backgroundColor = '#ADE8F4';
         cityNameEl.textContent = city;
-        date.textContent = currentDate;
-        date.style.fontSize = '1.25rem';
+        // date.textContent = currentDate;
+        // date.style.fontSize = '1.25rem';
         currentIconEl.innerHTML = `<img src = http://openweathermap.org/img/wn/${data.current.weather[0].icon}@2x.png>`;
 
         tempEl.textContent = "Temperature: ";
@@ -99,7 +104,7 @@ const getCurrentWeatherApi = (latitude, longitude, city) => {
         uv.textContent = data.current.uvi;
   
 
-        currentCity.append(date);
+        // currentCity.append(date);
         currentCity.append(cityNameEl);
         currentCity.append(currentIconEl);
 
@@ -142,7 +147,7 @@ const getFiveDayApi = (latitude, longitude) => {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
+      
       if (fiveDay !== null) {
         fiveDay.innerHTML = '';
       }
@@ -177,8 +182,11 @@ const getFiveDayApi = (latitude, longitude) => {
     });
 };
 
+
 // Creates the saved cities buttons
 const makeCityList = () => {
+  
+
   storedCities.forEach((city) => {
     const cityItem = document.createElement('li');
     const cityItemButton = document.createElement('button');
@@ -192,13 +200,26 @@ const makeCityList = () => {
   const cityDropDown = document.createElement('details');
   const dropDownTitle = document.createElement('summary');
   dropDownTitle.textContent = 'Previous Cities';
+
+  const clearButtonEl = document.createElement('button');
+  clearButtonEl.setAttribute('id', 'clearBtn');
+  clearButtonEl.setAttribute('class', 'clear-button');
+  clearButtonEl.innerHTML = 'Clear Search History';
+  savedCities.append(clearButtonEl);
   
   cityDropDown.append(dropDownTitle);
   cityDropDown.append(displayCitiesList);
   savedCities.append(cityDropDown);
+
 };
 
 makeCityList();
+
+const clearBtn = document.querySelector('#clearBtn');
+
+clearBtn.addEventListener('click', function() {
+  localStorage.clear();
+})
 
 // Creates the saved cities buttons array and runs an event listener to populate the search input field on click
 const cityButtons = document.getElementsByClassName('city-button');
