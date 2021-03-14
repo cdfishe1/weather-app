@@ -14,6 +14,7 @@ const storedCities = JSON.parse(localStorage.getItem("cityNames")) || [];
 const displayCitiesList = document.createElement('ul');
 
 
+
 // Set current day in header
 const dateDisplayEl = document.createElement('p');
 dateDisplayEl.innerHTML = currentDate;
@@ -38,6 +39,8 @@ submitCity.addEventListener('click', function() {
             city = data[0].name;
             // Create local storage for previous searched cities
             storedCities.push(cityName);
+            //This method returns the storedCities array as a new array with unique cities.
+            //I used the following article to help me understand this:  https://www.javascripttutorial.net/array/javascript-remove-duplicates-from-array/
             let deDupedCities = [...new Set(storedCities)];
             deDupedCities.sort();
             localStorage.setItem('cityNames', JSON.stringify(deDupedCities));
@@ -204,6 +207,7 @@ const makeCityList = () => {
   const clearButtonEl = document.createElement('button');
   clearButtonEl.setAttribute('id', 'clearBtn');
   clearButtonEl.setAttribute('class', 'clear-button');
+  clearButtonEl.setAttribute('aria-label', 'Clear Search History');
   clearButtonEl.innerHTML = 'Clear Search History';
   savedCities.append(clearButtonEl);
   
@@ -215,8 +219,8 @@ const makeCityList = () => {
 
 makeCityList();
 
-const clearBtn = document.querySelector('#clearBtn');
 
+const clearBtn = document.querySelector('#clearBtn');
 clearBtn.addEventListener('click', function() {
   localStorage.clear();
 })
@@ -225,6 +229,7 @@ clearBtn.addEventListener('click', function() {
 const cityButtons = document.getElementsByClassName('city-button');
 const cityButtonsArray = Array.from(cityButtons);
 
+//Creates the event listner for each saved city button
 cityButtonsArray.forEach((button) => {
   button.addEventListener('click', function() {
     cityInput.value = button.value;
