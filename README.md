@@ -52,15 +52,11 @@ let deDupedCities = [...new Set(storedCities)];
 
 ## Testing
 
-Tested accessibility using [WAVE web accessbility evaluation tool](https://wave.webaim.org/report#/https://cdfishe1.github.io/weather-app/)
-
-* Generates 0 errors.
-
 Generates 0 errors on load or through execution.
 
 ## Credits
 
-* Natalie Finnegan, bootcamp participant, for helping me understand jQuery element selection.
+David Metcalf, bootcamp tutor, helped me understand how to use a switch statement to refactor a string of else ifs.
 
 ## License
 

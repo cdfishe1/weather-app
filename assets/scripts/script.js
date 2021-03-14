@@ -123,20 +123,20 @@ const getCurrentWeatherApi = (latitude, longitude, city) => {
         uvEl.append(uv);
         currentCity.append(uvEl);
 
-        //I tried to make this a switch statement, but it did not work, even with tutor help.
-        if (data.current.uvi < 3) {
-          uv.style.backgroundColor = 'green';
-          uv.style.color = 'white';
-        } else if (data.current.uvi > 3 || data.current.uvi < 6) {
-          uv.style.backgroundColor = 'yellow';
-        } else if (data.current.uvi > 6 || data.current.uvi < 8) {
-          uv.style.backgroundColor = 'orange';
-          uv.style.color = 'white';
-        } else {
-          uv.style.backgroundColor = 'red';
-          uv.style.color = 'white';
+        //My tutor, David Metcalf, helped me construct this as a swtich statement rather than a chain of else ifs
+        switch (true) {
+          case data.current.uvi < 3:
+            uv.style.backgroundColor = 'green';
+            break;
+          case data.current.uvi > 3 && data.current.uvi < 6:
+            uv.style.backgroundColor = 'yellow';
+            break;
+          case data.current.uvi > 6 && data.current.uvi < 8:
+            uv.style.backgroundColor = 'orange';
+            break;
+          case data.current.uvi > 8:
+            uv.style.backgroundColor = 'red';
         }
-        
       
     });
 };
