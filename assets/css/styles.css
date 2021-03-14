@@ -44,6 +44,7 @@ main {
 
 .search-wrapper input {
     font-size: 1.5rem;
+    margin: 1vh 1vw;
 }
 
 .search-wrapper button {

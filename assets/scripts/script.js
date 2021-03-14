@@ -188,7 +188,14 @@ const makeCityList = () => {
     cityItem.append(cityItemButton);
     displayCitiesList.append(cityItem);
   })
-  savedCities.append(displayCitiesList);
+
+  const cityDropDown = document.createElement('details');
+  const dropDownTitle = document.createElement('summary');
+  dropDownTitle.textContent = 'Previous Cities';
+  
+  cityDropDown.append(dropDownTitle);
+  cityDropDown.append(displayCitiesList);
+  savedCities.append(cityDropDown);
 };
 
 makeCityList();
