@@ -188,7 +188,6 @@ const getFiveDayApi = (latitude, longitude) => {
 
 // Creates the saved cities buttons
 const makeCityList = () => {
-  
 
   storedCities.forEach((city) => {
     const cityItem = document.createElement('li');
